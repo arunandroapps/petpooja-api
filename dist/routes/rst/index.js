@@ -1,0 +1,24 @@
+"use strict";
+var __importDefault = (this && this.__importDefault) || function (mod) {
+    return (mod && mod.__esModule) ? mod : { "default": mod };
+};
+Object.defineProperty(exports, "__esModule", { value: true });
+const express_1 = require("express");
+const auth_1 = require("../../middleware/auth");
+const menu_1 = __importDefault(require("./menu"));
+const orders_1 = __importDefault(require("./orders"));
+const tables_1 = __importDefault(require("./tables"));
+const customers_1 = __importDefault(require("./customers"));
+const inventory_1 = __importDefault(require("./inventory"));
+const staff_1 = __importDefault(require("./staff"));
+const reports_1 = __importDefault(require("./reports"));
+const router = (0, express_1.Router)();
+router.use(auth_1.authenticate, (0, auth_1.authorize)('restaurant'));
+router.use('/menu', menu_1.default);
+router.use('/orders', orders_1.default);
+router.use('/tables', tables_1.default);
+router.use('/customers', customers_1.default);
+router.use('/inventory', inventory_1.default);
+router.use('/staff', staff_1.default);
+router.use('/reports', reports_1.default);
+exports.default = router;
